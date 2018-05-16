@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../css/fragtCSS.css">
+</head>
+
+<body>
+<div class="wrapper col-sm-9">
+
+
+<header>
+    {{ user }}
+</header>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="?">Fragt</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                <a class="nav-link {% if page == 'ordre' %} active {% else %}{% endif %}" href="?page=ordre">Ordre Bestilling</a>
+                </li>
+                <li class="nav-item" >
+                <a class="nav-link {% if page == 'vognparken' %} active {% else %}{% endif %}" href="?page=vognparken">Vognparken</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link {% if page == 'about' %} active {% else %}{% endif %}" href="?page=about">Om Fragt & Budcentralen Ringsted</a>
+                </li>
+            </ul>
+
+
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                {% if username is defined %}{% if userId is not null %}{{ username }}{% else %}Login{% endif %}{% endif %}
+            </button>
+            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="triggerId">
+                <div class="container col-sm-12">
+                    {% if userId is defined %}{% if userId is not null %}
+                        <form  action="" method="post">
+                            <div class="form-group">
+                                <p><span style="font-weight: bold">Logget ind som: </span>{{ username }}</p>
+                                <a href="?page=profil" class="btn btn-secondary col-sm-12">Profil</a>
+                                <input type="submit" name="logout" class="btn btn-primary col-sm-12" value="Logout">
+                            </div>
+                        </form>
+                    {% else %}
+                    <form  action="" method="post">
+                        <div class="form-group">
+                            <label for="">Brugernavn</label>
+                            <input type="text" class="form-control" name="loginEmail" id=""  placeholder="">
+                            <label for="">Kodeord</label>
+                            <input type="password" class="form-control" name="loginPassword" id=""  placeholder="">
+                            <input type="checkbox" name="rememberMe" >
+                            <label for="rememberMe">Husk Mig</label>
+                            <input type="submit" name="loginSubmit" class="btn btn-primary col-sm-12" value="Login">
+                        </div>
+                    </form>
+                    {% endif %}{% endif %}
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="?page=opretAccount">Opret ny Bruger</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+    $('#navId a').click(e = > {
+        e.preventDefault();
+    $(this).tab('show');
+    })
+    ;
+</script>
+
+<!-- nav tabs end -->
+
+    <!-- content -->
+    {% block content %}
+        <div class="jumbotron">
+            <div class="container">
+                <h1>404 Page not found</h1>
+            </div>
+        </div>
+    {% endblock %}
+
+
+    <!-- Footer -->
+    {% block footer %}
+    {% endblock %}
+
+</div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Holder.js for placeholder images -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends['layout/layout.html.twig'] %}
+
+{% block title %}
+    Opret Account
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <form action="" method="post">
+                <div class="form-group col-sm-5">
+                    <h1>Opret Account</h1>
+                    <label for="email">Email</label>
+                    <input type="email" name="loginEmail" id="" class="form-control" placeholder="Email" >
+                    <br>
+                    <label for="password">Password</label>
+                    <input type="password" name="loginPassword" id="" class="form-control" placeholder="Password" >
+                    <input type="password" name="passwordConfirm" id="" class="form-control" placeholder="Password Confirm" >
+                    <br>
+                    <input type="submit" name="accountCreate" class="btn btn-primary" value="Opret Account">
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

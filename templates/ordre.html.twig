@@ -1,0 +1,29 @@
+{% extends['layout/layout.html.twig'] %}
+
+{% block title %}
+    Ordre
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            {% if role == (1 or 2 or 3 or 4) %}
+                <div class="form-group col-sm-6">
+                    <h1>Ordre Bestilling</h1>
+                    <label for=""></label>
+                    <textarea type="text" name="beskrivelse" id="" class="form-control" placeholder="Ordre beskrivelse"></textarea>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                            Franco
+                        </label>
+                    </div>
+
+                </div>
+
+            {% else %}
+            no role
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

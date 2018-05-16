@@ -1,0 +1,46 @@
+{% extends['layout/layout.html.twig'] %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="nav-item">
+                    <a href="?page=profil" class="nav-link">Information</a>
+                </li>
+                <li class="nav-item">
+                    <a href="?page=profil&subpage=ordre" class="nav-link">Ordre</a>
+                </li>
+            </ul>
+            {% if subpage == 'ordre' %}
+                <h1>Ordre</h1>
+                <div class="container">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">Active item</a>
+                        <a href="#" class="list-group-item list-group-item-action">Item</a>
+                        <a href="#" class="list-group-item list-group-item-action disabled">Disabled item</a>
+                    </div>
+                </div>
+            {% else %}
+                    <h1>Profil</h1>
+
+                    <ul>
+                        <li>
+                            Email: {{ username }}
+                        </li>
+                        <li>
+                            Firma/kunde navn: {{ bruger.kundeNavn }}
+                        </li>
+                        <li>
+                            kundetype: {{ bruger.kundetype1.type }}
+                        </li>
+                    </ul>
+                <a href="#" class="btn btn-warning">Ændre oplysninger</a>
+                {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

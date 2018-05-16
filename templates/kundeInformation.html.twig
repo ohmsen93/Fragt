@@ -1,0 +1,30 @@
+{% extends['layout/layout.html.twig'] %}
+
+{% block title %}
+    Opret Account
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <form action="" method="post">
+                <div class="form-group col-sm-5">
+                    <h1>Additionel Information</h1>
+                    <label for="navn">Kunde Navn</label>
+                    <input type="text" name="navn" id="" class="form-control" placeholder="Kunde/Firma navn" >
+                    <br>
+                    <label for="type">Kunde Type</label>
+                    <select class="form-control" name="type">
+                        {% for items in kundetyper %}
+                            <option value="{{ items.typeID }}">{{ items.type }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <br>
+                    <input type="submit" name="kundeCreate" class="btn btn-primary" value="Opret Account">
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}
