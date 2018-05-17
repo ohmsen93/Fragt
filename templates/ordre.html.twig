@@ -8,19 +8,195 @@
     <div class="jumbotron">
         <div class="container">
             {% if role == (1 or 2 or 3 or 4) %}
-                <div class="form-group col-sm-6">
-                    <h1>Ordre Bestilling</h1>
-                    <label for=""></label>
-                    <textarea type="text" name="beskrivelse" id="" class="form-control" placeholder="Ordre beskrivelse"></textarea>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                            Franco
-                        </label>
-                    </div>
+                {% if subpage == 'ordre'  %}
+                    {% if pageid is defined %}
+                        <form action="" method="post">
+                            <!--
+                            Values:
+                                POST:
+                                    franco
+                                    ekspress
+                                    datetime
+                                    afPostnr
+                                    afBy
+                                    afVej
+                                    afNr
+                                    levPostnr
+                                    levBy
+                                    levVej
+                                    levNr
+                                    beskrivelse
+                            -->
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <h1>Ordre Bestilling</h1>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" name="franco" id="" value="checkedValue" {% if ordres.Franco == '1' %}checked{% else %}{% endif %}>
+                                            Franco
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" name="ekspress" id="" value="checkedValue" {% if ordres.fragt.ekspress == '1' %}checked{% else %}{% endif %}>
+                                            Ekspress
+                                        </label>
+                                    </div>
+                                    <br>
+                                    <div class="input-group date" data-provide="datepicker">
+                                        <label for="deadline" class="col-sm-12">Ønsket leverings dato </label>
 
-                </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class=''>
+                                                    <div class="form-group">
+                                                        <div class='input-group date' id='datetimepicker1'>
+                                                            <input type='text' name="datetime" class="form-control" value="{{ ordres.Dato }}" />
+                                                            <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <script type="text/javascript">
+                                                    $(function () {
+                                                        $('#datetimepicker1').datetimepicker();
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="form-group col-sm-12" >
+                                        <label for="afhentning" class="">Afhentnings Adresse</label>
+
+                                        <div class="row">
+                                            <input type="text" class="form-control col-sm-4" name="afPostnr" id="" placeholder="Postnr" value="{{ ordres.fragt.afPostnr }}">
+                                            <input type="text" class="form-control col-sm-8" name="afBy" id="" placeholder="By" value="{{ ordres.fragt.postnrBy.By }}">
+                                        </div>
+
+                                        <div class="row">
+                                            <input type="text" class="form-control col-sm-10" name="afVej" id="" placeholder="Vej" value="{{ ordres.fragt.afVej }}">
+                                            <input type="text" class="form-control col-sm-2" name="afNr" id="" placeholder="nr" value="{{ ordres.fragt.afHusNr }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-12">
+                                        <label for="" class="">Leverings Adresse</label>
+                                        <div class="row">
+                                            <input type="text" class="form-control col-sm-4" name="levPostnr" id="" placeholder="Postnr" value="{{ ordres.fragt.levPostnr }}">
+                                            <input type="text" class="form-control col-sm-8" name="levBy" id="" placeholder="By" value="{{ ordres.fragt.postnrBy1.By }}">
+                                        </div>
+                                        <div class="row">
+                                            <input type="text" class="form-control col-sm-10" name="levVej" id="" placeholder="Vej" value="{{ ordres.fragt.levVej }}">
+                                            <input type="text" class="form-control col-sm-2" name="levNr" id="" placeholder="nr" value="{{ ordres.fragt.levHusNr }}">
+                                        </div>
+                                    </div>
+                                    <div class="row col-sm-12">
+                                        <input type="submit" name="ordreUpdate" id="" value="Opdater" class="btn btn-warning col-sm-6">
+                                        <input type="submit" name="ordreDelete" id="" value="Slet" class="btn btn-danger col-sm-6">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <textarea type="text" name="beskrivelse" id="" class="form-control" placeholder="Ordre beskrivelse" style="height: 100%">{{ ordres.Beskrivelse }}</textarea>
+                                </div>
+                            </div>
+                        </form>
+                    {% else %}
+                        problem
+                    {% endif %}
+                {% else %}
+                    <form action="" method="post">
+                        <!--
+                        Values:
+                            POST:
+                                franco
+                                ekspress
+                                datetime
+                                afPostnr
+                                afBy
+                                afVej
+                                afNr
+                                levPostnr
+                                levBy
+                                levVej
+                                levNr
+                                beskrivelse
+                        -->
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <h1>Ordre Bestilling</h1>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="franco" id="" value="checkedValue">
+                                        Franco
+                                    </label>
+
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="ekspress" id="" value="checkedValue">
+                                        Ekspress
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <label for="deadline" class="col-sm-12">Ønsket leverings dato </label>
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class=''>
+                                                <div class="form-group">
+                                                    <div class='input-group date' id='datetimepicker1'>
+                                                        <input type='text' name="datetime" class="form-control" />
+                                                        <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <script type="text/javascript">
+                                                $(function () {
+                                                    $('#datetimepicker1').datetimepicker();
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12" >
+                                    <label for="afhentning" class="">Afhentnings Adresse</label>
+
+                                    <div class="row">
+                                        <input type="text" class="form-control col-sm-4" name="afPostnr" id="" placeholder="Postnr">
+                                        <input type="text" class="form-control col-sm-8" name="afBy" id="" placeholder="By">
+                                    </div>
+
+                                    <div class="row">
+                                        <input type="text" class="form-control col-sm-10" name="afVej" id="" placeholder="Vej">
+                                        <input type="text" class="form-control col-sm-2" name="afNr" id="" placeholder="nr">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12">
+                                    <label for="" class="">Leverings Adresse</label>
+                                    <div class="row">
+                                        <input type="text" class="form-control col-sm-4" name="levPostnr" id="" placeholder="Postnr">
+                                        <input type="text" class="form-control col-sm-8" name="levBy" id="" placeholder="By">
+                                    </div>
+                                    <div class="row">
+                                        <input type="text" class="form-control col-sm-10" name="levVej" id="" placeholder="Vej">
+                                        <input type="text" class="form-control col-sm-2" name="levNr" id="" placeholder="nr">
+                                    </div>
+                                </div>
+                                <input type="submit" name="ordreCreate" id="" value="Bestil" class="btn btn-primary btn-block">
+                            </div>
+                            <div class="form-group col-sm-8">
+                                <textarea type="text" name="beskrivelse" id="" class="form-control" placeholder="Ordre beskrivelse" style="height: 100%"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                {% endif %}
             {% else %}
             no role
             {% endif %}

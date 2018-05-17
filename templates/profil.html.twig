@@ -19,9 +19,9 @@
                 <h1>Ordre</h1>
                 <div class="container">
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action active">Active item</a>
-                        <a href="#" class="list-group-item list-group-item-action">Item</a>
-                        <a href="#" class="list-group-item list-group-item-action disabled">Disabled item</a>
+                        {% for ordre in ordres %}
+                            <a href="?page=ordre&subpage=ordre&pageid={{ ordre.ordreID }}" class="list-group-item list-group-item-primary">{{ ordre.QR }}</a>
+                        {% endfor %}
                     </div>
                 </div>
             {% else %}

@@ -16,6 +16,7 @@ if(isset($_COOKIE['username'])){
 
 $page = $_GET["page"] ?? "";
 $subpage = $_GET["subpage"] ?? "";
+$pageid = $_GET["pageid"] ?? "";
 $user = $_SESSION["username"] ?? null;
 
 // Login
@@ -74,13 +75,33 @@ if(isset($_COOKIE['password'])){
 $kundetyper = "";
 $bruger[0] = "";
 $type = "";
+$ordres = "";
 $Role = $_SESSION['userRole']->RoleId ?? "";
+$bruger = kundeGet($userId, $token);
 
 
 
                 Switch($page){
                     case "ordre":
                         $template = $twig->loadTemplate('ordre.html.twig');
+                        include '../func/ordreHandler.php';
+                        if(isset($_POST['ordreCreate'])) {
+                            ordreCreate($_POST['franco'] ?? "", $_POST['ekspress'] ?? "", $_POST['datetime'], $_POST['afPostnr'], $_POST['afBy'], $_POST['afVej'], $_POST['afNr'], $_POST['levPostnr'], $_POST['levBy'], $_POST['levVej'], $_POST['levNr'], $_POST['beskrivelse'], $token, $userId);
+                        }
+                        if(isset($_GET['pageid'])){
+                            $ordres = singleordreGET($_GET['pageid'], $token);
+                            if(isset($_POST['ordreUpdate'])){
+                                $result = ordreUpdate($_POST['franco'] ?? "", $_POST['ekspress'] ?? "", $_POST['datetime'], $_POST['afPostnr'], $_POST['afBy'], $_POST['afVej'], $_POST['afNr'], $_POST['levPostnr'], $_POST['levBy'], $_POST['levVej'], $_POST['levNr'], $_POST['beskrivelse'], $token, $bruger[0], $pageid, $ordres->fragt->fragtID);
+                                echo "<pre>";
+                                print_r($result);
+                                echo "</pre>";
+                            }
+                            if(isset($_POST['ordreDelete'])){
+                                 ordreDelete($token, $pageid, $ordres->fragt->fragtID);
+
+                            }
+                        }
+
                         break;
                     case "about":
                         $template = $twig->loadTemplate('about.html.twig');
@@ -100,22 +121,20 @@ $Role = $_SESSION['userRole']->RoleId ?? "";
                         break;
                     case "profil":
                         $template = $twig->loadTemplate('profil.html.twig');
-
-                        $bruger = kundeGet($userId, $token);
+                        $ordres = ordresGET($bruger[0]->kundeID, $token);
                         break;
-
                     default:
                         $template = $twig->loadTemplate('index.html.twig');
                     break;
                 }
 
 
-
-
 echo $template->render(
     array(
         'page' => $page,
         'subpage' => $subpage,
+        'pageid' => $pageid,
+        'ordres' => $ordres,
         'token' => $token,
         'userId' => $userId,
         'role' => $Role,

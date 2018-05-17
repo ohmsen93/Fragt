@@ -38,7 +38,41 @@
 
     }
 
-        function userCreate($email, $password, $confirmPassword){
+    function ordresGET($userId, $authorization){
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_URL, "http://localhost:65278/api/ordres/kunde/$userId" );
+        $token = "Authorization: Bearer $authorization";
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $token ));
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $result =(curl_exec($curl));
+
+        $jsonresult = json_decode($result);
+
+        curl_close($curl);
+        return $jsonresult;
+    }
+
+    function singleordreGET($id, $authorization){
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_URL, "http://localhost:65278/api/ordres/$id" );
+        $token = "Authorization: Bearer $authorization";
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $token ));
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $result =(curl_exec($curl));
+
+        $jsonresult = json_decode($result);
+
+        curl_close($curl);
+        return $jsonresult;
+    }
+
+
+
+
+
+function userCreate($email, $password, $confirmPassword){
             $data = array('Email' => $email, 'Password' => $password, 'ConfirmPassword' => $confirmPassword);
 
             $userCreate = curl_init( 'http://localhost:65278/api/Account/Register' );
